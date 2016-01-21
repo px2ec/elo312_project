@@ -1,2 +1,2 @@
-# elo312_project
+Proyecto Internet of Clocks
 # elo312_project
