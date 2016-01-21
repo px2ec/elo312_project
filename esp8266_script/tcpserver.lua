@@ -4,9 +4,8 @@ SET_ALARM = 4
 tm = loadfile("ntp.lua")()
 
 mspSyncTime = function(T)
-	--cmd = string.char(255, 255, SYNC, T.hour, T.minute, T.second)
-	--print(cmd)
-	print(T:show_time())
+	cmd = string.char(255, 255, SYNC, T.hour, T.minute, T.second)
+	print(cmd)
 end
 
 mspSetAlarm = function(tab)
