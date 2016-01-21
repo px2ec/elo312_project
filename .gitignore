@@ -1,0 +1,8 @@
+*.pyc
+
+*.ewd
+*.eww
+*.dep
+*.ewp
+msp430/settings/*
+msp430/Debug/*
