@@ -205,9 +205,9 @@ void options() {
 	case NTP_SYNC: 
 		// fill with setup rtc method
 		// printf("hour: %d \t minute: \t %d second: %d\n", (int)buffpkt.param[0], (int)buffpkt.param[1], (int)buffpkt.param[2]); // eliminate when i2c and sd are implemented
-		hour = (unsigned int)buffpkt.param[0];
-		min = (unsigned int)buffpkt.param[1];
-		sec = (unsigned int)buffpkt.param[2];
+		hour = (int)buffpkt.param[0];
+		min = (int)buffpkt.param[1];
+		sec = (int)buffpkt.param[2];
 
 		hour_pm = (hour >= 12) ? 1 : 0;
 		hour = hour % 12;

@@ -10,25 +10,25 @@
 #define B_LED 0x04
 
 extern volatile u8 hour_pm;
-extern volatile unsigned int hour;
-extern volatile unsigned int min;
-extern volatile unsigned int sec;
+extern volatile int hour;
+extern volatile int min;
+extern volatile int sec;
 
 extern int alm_hour;
 extern int alm_min;
 extern u8 alm_pm;
 extern u8 alm_on;
 
-extern unsigned int Tick_hour;
-extern unsigned int Tick_min;
-extern unsigned int Tick_sec;
+extern int Tick_hour;
+extern int Tick_min;
+extern int Tick_sec;
 
 extern int interval;
 extern int hdd_tick_count;
 
-void OrderLedCalls(unsigned int x, unsigned int y, unsigned int z);
-void RedLED(unsigned int x);
-void GreenLED(unsigned int x);
-void BlueLED(unsigned int x);
+void OrderLedCalls(int x, int y, int z);
+void RedLED(int x);
+void GreenLED(int x);
+void BlueLED(int x);
 
 #endif
