@@ -11,6 +11,12 @@ TCP_IP = '10.0.1.72'
 TCP_PORT = 1313
 BUFFER_SIZE = 1024
 
+class TransportError(Exception):
+    """Custom exception to represent errors with a transport
+    """
+    def __init__(self, message):
+        self.message = message
+
 class devTransport(object):
 	def __init__(self, host):
 		self.host = host
@@ -33,8 +39,8 @@ class devTransport(object):
 		data = json.loads(databuff)
 		print "Status from esp8266", data["STATUS"]
 
-	def setAlarm(self, hour, minute):
-		MESSAGE = json.dumps({"INTR": SET_ALARM, "VALUES": {"H": int(hour), "m": int(minute)}})
+	def setAlarm(self, hour, minute, tone):
+		MESSAGE = json.dumps({"INTR": SET_ALARM, "VALUES": {"H": int(hour), "m": int(minute), "TONE" : int(tone)}})
 		self.socket.sendall(MESSAGE)
 		databuff = self.socket.recv(BUFFER_SIZE)
 		data = json.loads(databuff)
@@ -63,8 +69,9 @@ if __name__ == '__main__':
 	if args.setalarm:
 		if devt == None:
 			devt = devTransport(TCP_IP)
-		tarr = args.setalarm.strip().split(':')
-		devt.setAlarm(tarr[0], tarr[1])
+		tarr1 = args.setalarm.strip().split('-')
+		tarr2 = tarr1[0].strip().split(':')
+		devt.setAlarm(tarr2[0], tarr2[1], tarr1[1])
 
 	sys.exit(0)
 

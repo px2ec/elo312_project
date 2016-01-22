@@ -35,18 +35,26 @@ class MainWindow(QtGui.QMainWindow, ui_mainwindow.Ui_MainWindow):
 		if self.devt == None:
 			return None
 		self.devt.ntpSync()
-		del self.devt
-		self.devt = devTransport(self.ip)
+		self._reinitsock()
 
 	def pbalarmclicked(self):
+		if self.devt == None:
+			return None
 		text, boolean = QtGui.QInputDialog.getText(self, 'Set alarm', 'Time')
 		if not boolean:
 			return None
 		tstr = ''.join([str(x) for x in text])
 		tarr = tstr.strip().split(':')
-		self.devt.setAlarm(tarr[0], tarr[1])
+		text, boolean = QtGui.QInputDialog.getText(self, 'Set alarm', 'Tone 1-6')
+		if not boolean:
+			return None
+		tstr = ''.join([str(x) for x in text])
+		self.devt.setAlarm(tarr[0], tarr[1], tstr)
+		self._reinitsock()
+
+	def _reinitsock(self):
 		del self.devt
 		self.devt = devTransport(self.ip)
 
 	def __del__(self):
-		del self.socket
+		del self.devt
